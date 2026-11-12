@@ -14,7 +14,7 @@ service:
   nodePort: 30080
 
 migration:
-  delaySeconds: 120
+  delaySeconds: 45
 
 # Run workloads on the dedicated worker node, not the control plane
 nodeSelector:
