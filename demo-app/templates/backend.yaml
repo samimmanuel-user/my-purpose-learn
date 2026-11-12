@@ -22,11 +22,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 3000
-          env:
-            - { name: DB_HOST, value: {{ .Values.db.host | quote }} }
-            - { name: DB_NAME, value: {{ .Values.db.name | quote }} }
-            - { name: DB_USER, value: {{ .Values.db.user | quote }} }
-            - { name: DB_PASSWORD, value: {{ .Values.db.password | quote }} }
+          envFrom:
+            - secretRef:
+                name: db-credentials
           volumeMounts:
             - { name: logs, mountPath: /var/log/app }
           readinessProbe:

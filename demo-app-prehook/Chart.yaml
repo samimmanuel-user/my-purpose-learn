@@ -1,0 +1,6 @@
+apiVersion: v2
+name: demo-app-prehook
+description: PreSync migration job that needs the Sync-phase secret (fails on purpose)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
