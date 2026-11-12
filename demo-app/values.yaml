@@ -13,6 +13,9 @@ service:
   type: NodePort
   nodePort: 30080
 
+migration:
+  delaySeconds: 0
+
 # Run workloads on the dedicated worker node, not the control plane
 nodeSelector:
   node-role.kubernetes.io/worker: ""

@@ -16,7 +16,7 @@ spec:
         - name: migrate
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["node", "migrate.js"]
+          command: ["sh", "-c", "sleep {{ .Values.migration.delaySeconds }} && node migrate.js"]
           envFrom:
             - secretRef:
                 name: db-credentials
