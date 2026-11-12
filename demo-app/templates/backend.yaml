@@ -16,6 +16,14 @@ spec:
       volumes:
         - name: logs
           emptyDir: {}
+      initContainers:
+        - name: migrate
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh", "-c", "sleep {{ .Values.migration.delaySeconds }} && node migrate.js"]
+          envFrom:
+            - secretRef:
+                name: db-credentials
       containers:
         - name: backend
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
