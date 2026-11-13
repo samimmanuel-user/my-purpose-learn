@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-app-test
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/samimmanuel-user/my-purpose-learn.git
+    targetRevision: main
+    path: demo-app
+    helm:
+      valueFiles: [values.yaml]
+      parameters:
+        - name: service.nodePort
+          value: "30081"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo-test
+  syncPolicy:
+    syncOptions: [CreateNamespace=true]
